@@ -1,0 +1,153 @@
+<div class="notification-demo-container">
+  <mat-card class="demo-card">
+    <mat-card-header>
+      <mat-card-title>Notification System Demo</mat-card-title>
+      <mat-card-subtitle>Explore different types of notifications</mat-card-subtitle>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <div>
+        <h3>Try out the predefined notification types</h3>
+        <p>Click on any button below to see the corresponding notification</p>
+        
+        <div class="notification-buttons">
+          <button 
+            mat-raised-button 
+            color="primary" 
+            (click)="showSuccessNotification()">
+            <mat-icon>check_circle</mat-icon>
+            Success
+          </button>
+          
+          <button 
+            mat-raised-button 
+            color="warn" 
+            (click)="showErrorNotification()">
+            <mat-icon>error</mat-icon>
+            Error
+          </button>
+          
+          <button 
+            mat-raised-button 
+            color="primary" 
+            (click)="showInfoNotification()">
+            <mat-icon>info</mat-icon>
+            Info
+          </button>
+          
+          <button 
+            mat-raised-button 
+            (click)="showWarningNotification()">
+            <mat-icon>warning</mat-icon>
+            Warning
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="custom-card">
+    <mat-card-header>
+      <mat-card-title>Custom Notification</mat-card-title>
+      <mat-card-subtitle>Create your own custom notifications</mat-card-subtitle>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <div>
+        <h3>Create your own notification</h3>
+        <p>Customize the notification settings and click "Show Notification" to test</p>
+        
+        <form [formGroup]="customNotificationForm" (ngSubmit)="showCustomNotification()">
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Notification Message</mat-label>
+              <input matInput formControlName="message" placeholder="Enter your notification message">
+              <mat-error *ngIf="customNotificationForm.get('message')?.invalid">
+                Message is required and must be at least 3 characters
+              </mat-error>
+            </mat-form-field>
+          </div>
+          
+          <div class="form-row two-columns">
+            <mat-form-field appearance="outline">
+              <mat-label>Notification Type</mat-label>
+              <mat-select formControlName="type">
+                <mat-option *ngFor="let type of notificationTypes" [value]="type">
+                  <mat-icon>{{ getNotificationIcon(type) }}</mat-icon>
+                  {{ type }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline">
+              <mat-label>Duration</mat-label>
+              <mat-select formControlName="duration">
+                <mat-option *ngFor="let duration of notificationDurations" [value]="duration.value">
+                  {{ duration.label }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          
+          <div class="form-row two-columns">
+            <mat-form-field appearance="outline">
+              <mat-label>Action Button Text</mat-label>
+              <input matInput formControlName="action" placeholder="Close">
+            </mat-form-field>
+            
+            <div class="toggle-container">
+              <mat-slide-toggle formControlName="useCustomComponent" color="primary">
+                Use Custom Component
+              </mat-slide-toggle>
+              <p class="toggle-help-text">Toggle to use the custom notification component</p>
+            </div>
+          </div>
+          
+          <div class="form-actions">
+            <button 
+              mat-raised-button 
+              color="primary" 
+              type="submit"
+              [disabled]="customNotificationForm.invalid">
+              Show Notification
+            </button>
+            
+            <button 
+              mat-button 
+              type="button"
+              (click)="resetForm()">
+              Reset
+            </button>
+          </div>
+        </form>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="info-card">
+    <mat-card-header>
+      <mat-card-title>Notification Types</mat-card-title>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <div class="notification-info">
+        <div class="notification-types">
+          <div class="chips">
+            <mat-chip color="primary" selected><mat-icon>check_circle</mat-icon> Success</mat-chip>
+            <mat-chip color="warn" selected><mat-icon>error</mat-icon> Error</mat-chip>
+            <mat-chip color="accent" selected><mat-icon>info</mat-icon> Info</mat-chip>
+            <mat-chip><mat-icon>warning</mat-icon> Warning</mat-chip>
+          </div>
+        </div>
+        
+        <h4>Notification Durations</h4>
+        <ul>
+          <li><strong>Short:</strong> 3 seconds</li>
+          <li><strong>Medium:</strong> 4 seconds</li>
+          <li><strong>Long:</strong> 5 seconds</li>
+          <li><strong>Extra Long:</strong> 10 seconds</li>
+        </ul>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

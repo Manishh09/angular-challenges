@@ -1,4 +1,94 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+
+
+/* Angular Material SnackBar overrides */
+.mdc-snackbar {
+    z-index: 1000;
+}
+
+.mat-mdc-snack-bar-container {
+    
+    &.notification-success {
+        --mdc-snackbar-container-color: #e8f5e9;
+        --mdc-snackbar-supporting-text-color: rgba(0, 0, 0, 0.87);
+
+        .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled) {
+            color: #2e7d32;
+        }
+    }
+
+    &.notification-error {
+        --mdc-snackbar-container-color: #ffebee;
+        --mdc-snackbar-supporting-text-color: rgba(0, 0, 0, 0.87);
+
+        .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled) {
+            color: #c62828;
+        }
+    }
+
+    &.notification-info {
+        --mdc-snackbar-container-color: #e3f2fd;
+        --mdc-snackbar-supporting-text-color: rgba(0, 0, 0, 0.87);
+
+        .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled) {
+            color: #1565c0;
+        }
+    }
+
+    &.notification-warning {
+        --mdc-snackbar-container-color: #fff8e1;
+        --mdc-snackbar-supporting-text-color: rgba(0, 0, 0, 0.87);
+
+        .mat-mdc-button.mat-mdc-snack-bar-action:not(:disabled) {
+            color: #ff8f00;
+        }
+    }
+
+    &.notification-success {
+        .mdc-snackbar__surface {
+            background-color: rgb(190, 236, 195) !important;
+            padding: 0 !important;
+            min-width: 344px !important;
+        }
+    }
+
+    &.notification-error {
+        .mdc-snackbar__surface {
+            background-color: rgb(243, 175, 175) !important;
+            padding: 0 !important;
+            min-width: 344px !important;
+        }
+    }
+
+    &.notification-info {
+        .mdc-snackbar__surface {
+            background-color: rgb(160, 175, 236) !important;
+            padding: 0 !important;
+            min-width: 344px !important;
+        }
+    }
+
+    &.notification-warning {
+
+        .mdc-snackbar__surface {
+            background-color: rgb(236, 235, 163) !important;
+            padding: 0 !important;
+            min-width: 344px !important;
+        }
+
+
+    }
+}
+
