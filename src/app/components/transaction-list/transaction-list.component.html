@@ -1,0 +1,56 @@
+<div class="transaction-list-container">
+  <div class="header">
+    <h2>Transaction Filter</h2>
+  </div>  
+
+  <div class="filters">
+    <div class="search-filter">
+      <input 
+        type="text" 
+        [formControl]="searchControl"
+        placeholder="Search by description..."
+        class="search-input"
+      >
+    </div>
+    
+    <div class="type-filter">
+      <select [formControl]="typeControl" class="type-select">
+        <option value="all">All Transactions</option>
+        <option value="debit">Debit</option>
+        <option value="credit">Credit</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="transactions">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>Type</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (transaction of (filteredTransactions$ | async); track transaction.id) {
+          <tr [class]="transaction.type">
+            <td>{{ transaction.id }}</td>
+            <td>{{ transaction.date }}</td>
+            <td>{{ transaction.description }}</td>
+            <td [class]="transaction.type === 'credit' ? 'positive' : 'negative'">
+              {{ transaction.amount | currency }}
+            </td>
+            <td>{{ transaction.type | titlecase }}</td>
+          </tr>
+        }
+        @empty {
+          <tr>
+            <td colspan="5" class="no-results">No transactions found</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
