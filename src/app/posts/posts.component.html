@@ -1,0 +1,38 @@
+@if (isLoading) {
+    <!-- Loading State -->
+  <div class="loading">
+    Loading Data...
+  </div>
+} @else if (hasError) {
+    <!-- Error State -->
+  <div class="error">
+    Failed to load data. Please try again later.
+    <button (click)="refreshData()" class="refresh-button">
+      Try Again
+    </button>
+  </div>
+} @else {
+  <div class="posts-container">
+    <!-- Refresh Button -->
+    <button (click)="refreshData()" class="refresh-button">
+      Refresh Data
+    </button>
+
+    <!-- Posts List -->
+    @if (posts.length > 0) {
+      <div class="posts-list">
+        @for (post of posts; track post.id) {
+          <article class="post-card">
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.body }}</p>
+          </article>
+        }
+      </div>
+    } @else {
+      <div class="no-posts">
+        No posts available.
+      </div>
+    }
+
+  </div>
+}
